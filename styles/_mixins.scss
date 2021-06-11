@@ -1,0 +1,53 @@
+
+@mixin flex($direction:row,$justify-content:center,$align-items:center,$column-gap:5px,$row-gap:5px) {
+    display:flex;
+    flex-direction: $direction;
+    justify-content: $justify-content;
+    align-items: $align-items;
+    column-gap: $column-gap;
+    row-gap: $row-gap;
+}
+
+@mixin grid($repeat:5,$width-column:1fr,$column-gap:5px,$row-gap:5px) {
+    display: grid;
+    grid-template-columns: repeat($repeat,$width-column);
+    column-gap: $column-gap;
+    row-gap: $row-gap;
+}
+
+@mixin button-hover-fx {
+    cursor: pointer;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    border-radius: 0.25em;
+    p,i,a {
+        text-decoration: none;
+        position: relative;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+        z-index: 1;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        transition: 0.25s;
+        z-index: 0;
+        border-radius: 0.25em;
+    }
+    
+    &:hover {
+        p,i,a {
+            color:white;
+        }
+        &::after {
+            width: 100%;
+            height: 100%;
+            background-color: orangered;
+            box-shadow: orangered 0px 1px 3px 0px, orangered 0px 0px 0px 1px;
+        }
+    }
+}
