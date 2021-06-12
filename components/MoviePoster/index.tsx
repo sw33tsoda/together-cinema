@@ -1,10 +1,16 @@
 import Moment from "react-moment";
 import Link from 'next/link';
+import classnames from 'classnames';
 
-export default function MoviePoster({data,isScreening}) : JSX.Element {
+export default function MoviePoster({data,isScreening,isOverview}) : JSX.Element {
+
+    const handleClassNames = classnames("movie-poster",{
+        "movie-poster--overview": isOverview == true,
+    });
+
     return (
         <Link href={`/movie/single/${data.id}`}>
-            <div className="movie-poster">
+            <div className={handleClassNames}>
                 <img className="movie-poster__image" src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`} alt={data.original_title} />
                 <div className="movie-poster__overlay">
                     <div className="movie-poster__overlay__info">
