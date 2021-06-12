@@ -4,6 +4,93 @@
     @include grid(6,1fr);
 }
 
+.movie-overview {
+    width: 100%;
+    height: 100vh;
+    border-bottom: 2px solid black;
+    padding: 5px 10px 5px 10px;
+    position: relative;
+    &__backdrop {
+        width: inherit;
+        height: 25vw;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment:fixed;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    }
+
+    &__poster {
+        position: absolute;
+        width: 20vw;
+        left: 5vw;
+        top: 11vw;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    }
+
+    &__title {
+        position: absolute;
+        left: 26.5vw;
+        top: 21vw;
+        font-size: 1.25vw;
+        color: white;
+        text-shadow: 1px 1px orangered;
+    }
+
+    &__description {
+        position: absolute;
+        left: 26.5vw;
+        top: 26.5vw;
+        font-size: 1.25vw;
+        color: #212121;
+        padding-right: 5vw;
+        @include flex(column,flex-start,flex-start,0,10px);
+
+        &__score {
+            @include flex;
+            h1 {
+                text-shadow: 1px 1px orangered;
+                sup {
+                    padding-left: 5px;
+                    font-size: 0.75em;
+                }
+            }
+        }
+
+        &__overview {
+            
+        }
+
+        &__genres {
+            @include flex(row,flex-start,center);
+            &__genre {
+                padding: 5px;
+                // color:white;
+                @include button-hover-fx;
+            }
+        }
+        &__spoken-languages {
+            @include flex;
+            column-gap: 10px;
+            &__language {
+                @include link(0.25s);
+                @include flex(row,center,center);
+                font-weight: bold;
+            }
+        }
+        &__production-companies {
+            @include flex;
+            column-gap: 10px;
+            height: 2.5vw;
+            &__company {
+                height: inherit;
+                img {
+                    height: 100%;
+                }
+            }
+        }
+    }
+}
+
 .movie-poster {
     width: 100%;
     overflow: hidden;
@@ -11,6 +98,7 @@
     z-index: 0;
     
     &__image {
+        // border-radius: 0.25em;
         width: inherit;
         vertical-align: middle;
         transition: 1s ease-out;
@@ -23,6 +111,7 @@
             opacity: 1;
         }
         &__image {
+            border-radius: 0.25em;
             transform: scale(1.25);
             filter: grayscale(0%);
         }
