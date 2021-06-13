@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MoviePoster from "../MoviePoster";
 
 export default function UpComingMovies({maxItem}) : JSX.Element {
@@ -16,8 +16,10 @@ export default function UpComingMovies({maxItem}) : JSX.Element {
         api();
     },[page]);
     return (
-        <div className="movies-list">
-            {data.length > 0 && data.map((movie,index) => <MoviePoster key={index} isScreening={false} data={movie}/>)}
-        </div>
+        <React.Fragment>
+            <div className="movies-list">
+                {data.length > 0 && data.map((movie,index) => <MoviePoster key={index} isReleased={false} data={movie} isOverview={false}/>)}
+            </div>
+        </React.Fragment>
     );
 }

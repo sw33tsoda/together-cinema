@@ -1,0 +1,48 @@
+.review {
+    @include flex(column,flex-start,flex-start,25px,10px);
+    &__author-profile {
+        @include flex(row,flex-start,center,10px,0);
+        &__image {
+            width: 4vw;
+            height: 4vw;
+            border-radius: 50%;
+            overflow: hidden;
+            img {
+                width: 100%;
+                object-fit:cover;
+            }
+            font-weight: bold;
+            @include flex;
+            font-size: 2vw;
+        }
+        &__name {
+            font-weight: bold;
+            font-size: 1.5vw;
+            span {
+                font-size: 1vw;
+            }
+        }
+    }
+    
+    &__author-content {
+        // background-color: rgba(255, 68, 0, 0.1);
+        border:1px solid silver;
+        border-radius: 0.25em;
+        padding: 10px;
+        &__content {
+            font-style: italic;
+            font-size: 1.25vw;
+            p {
+                display: inline;
+            }
+            &__expand-btn {
+                color:#212121;
+                margin-left: 5px;
+                padding: 1.5px;
+                font-style: normal !important;
+                // font-weight: bold;
+                @include button-hover-fx;
+            }
+        }
+    }
+}

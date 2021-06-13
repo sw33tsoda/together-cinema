@@ -2,8 +2,13 @@ import Moment from "react-moment";
 import Link from 'next/link';
 import classnames from 'classnames';
 
-export default function MoviePoster({data,isScreening,isOverview}) : JSX.Element {
+type MoviePosterProps = {
+    data:any,
+    isOverview:boolean,
+}
 
+export default function MoviePoster({data,isOverview} : MoviePosterProps) : JSX.Element {
+    const isReleased:boolean = new Date(data.release_date).getTime() <= new Date().getTime() ? true : false;
     const handleClassNames = classnames("movie-poster",{
         "movie-poster--overview": isOverview == true,
     });
@@ -15,7 +20,7 @@ export default function MoviePoster({data,isScreening,isOverview}) : JSX.Element
                 <div className="movie-poster__overlay">
                     <div className="movie-poster__overlay__info">
                         <h1>{data.original_title}</h1>
-                        <p>{isScreening ? "Đang chiếu" : "Sắp chiếu"}</p>
+                        <p>{isReleased ? "Đã phát hành" : "Chưa phát hành"}</p>
                         <p><Moment format="DD/MM/YYYY">{data.release_date}</Moment></p>
                     </div>
                     <div className="movie-poster__overlay__button-wrapper">

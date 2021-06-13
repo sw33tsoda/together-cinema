@@ -21,7 +21,7 @@
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     // box-shadow: inset -11px -22px 0px -17px orangered;
     border-radius: 0.25em;
-    p,i,a {
+    p,i,a,span {
         text-decoration: none;
         position: relative;
         text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
@@ -53,7 +53,7 @@
     }
     
     &:hover {
-        p,i,a {
+        p,i,a,span {
             color:white;
         }
         &::after {
@@ -61,6 +61,25 @@
             height: 100%;
             background-color: orangered;
             box-shadow: orangered 0px 1px 3px 0px, orangered 0px 0px 0px 1px;
+        }
+    }
+}
+
+@mixin image-hover {
+    overflow: hidden;
+
+    &__image {
+        width: 100%;
+        vertical-align: middle;
+        transition: 1s ease-out;
+        filter: grayscale(85%);
+    }
+
+    &:hover & {
+        &__image {
+            border-radius: 0.25em;
+            transform: scale(1.25);
+            filter: grayscale(0%);
         }
     }
 }
