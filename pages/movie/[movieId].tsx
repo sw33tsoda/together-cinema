@@ -2,14 +2,17 @@ import axios from 'axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import MoviePoster from '../../../components/MoviePoster';
-import Nav from '../../../components/Nav';
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css"
 import "swiper/components/navigation/navigation.min.css"
 import SwiperCore, { Pagination,Navigation } from 'swiper/core';
-import MovieReview from '../../../components/MovieReview';
+import Moment from 'react-moment';
+import MoviePoster from '../../components/MoviePoster';
+import MovieReview from '../../components/MovieReview';
+import Nav from '../../components/Nav';
+import { apiKey } from '../../appconfig';
 SwiperCore.use([Pagination,Navigation]);
 
 export default function MovieOverview() : JSX.Element {
@@ -24,6 +27,7 @@ export default function MovieOverview() : JSX.Element {
         production_companies:[],
         vote_average:0,
         vote_count:0,
+        release_date:'',
     });
     const [cast,setCast] = useState([]);
     const [reviews,setReviews] = useState([]);
@@ -34,11 +38,12 @@ export default function MovieOverview() : JSX.Element {
             getMovieCast();
             getMovieReviews();
             getSimiliarMovies();
+            // getMovieImages();
         }
     },[router.query.movieId]);
 
     const getMovieOverview = async () => {
-        await axios.get(`https://api.themoviedb.org/3/movie/${router.query.movieId}?api_key=acfc608a0a45e9649228005e83f3a421&language=en-US`).then((response) => {
+        await axios.get(`https://api.themoviedb.org/3/movie/${router.query.movieId}?api_key=${apiKey}&language=en-US`).then((response) => {
             setData({...response.data});
         }).catch((error) => {
             console.log(error);
@@ -46,7 +51,7 @@ export default function MovieOverview() : JSX.Element {
     }
 
     const getMovieCast = async () => {
-        await axios.get(`https://api.themoviedb.org/3/movie/${router.query.movieId}/credits?api_key=acfc608a0a45e9649228005e83f3a421&language=en-US`).then((response) => {
+        await axios.get(`https://api.themoviedb.org/3/movie/${router.query.movieId}/credits?api_key=${apiKey}&language=en-US`).then((response) => {
             setCast([...response.data.cast]);
         }).catch((error) => {
             console.log(error);
@@ -54,7 +59,7 @@ export default function MovieOverview() : JSX.Element {
     }
 
     const getMovieReviews = async () => {
-        await axios.get(` https://api.themoviedb.org/3/movie/${router.query.movieId}/reviews?api_key=acfc608a0a45e9649228005e83f3a421&language=en-US&page=1`).then((response) => {
+        await axios.get(` https://api.themoviedb.org/3/movie/${router.query.movieId}/reviews?api_key=${apiKey}&language=en-US&page=1`).then((response) => {
             setReviews(response.data.results.length >= 5 ? [...response.data.results.slice(0,5)] : [...response.data.results]);
         }).catch((error) => {
             console.log(error);
@@ -62,14 +67,23 @@ export default function MovieOverview() : JSX.Element {
     }
 
     const getSimiliarMovies = async () => {
-        await axios.get(`https://api.themoviedb.org/3/movie/${router.query.movieId}/similar?api_key=acfc608a0a45e9649228005e83f3a421&language=en-US&page=1
+        await axios.get(`https://api.themoviedb.org/3/movie/${router.query.movieId}/similar?api_key=${apiKey}&language=en-US&page=1
         `).then((response) => {
-            console.log(response);
             setSimiliarMovies(response.data.results.length >= 9 ? [...response.data.results.slice(0,9)] : [...response.data.results]);
         }).catch((error) => {
             console.log(error);
         });
     }
+
+    const getMovieImages = async () => {
+        await axios.get(` https://api.themoviedb.org/3/movie/${router.query.movieId}/images?api_key=${apiKey}&language=en-US
+        `).then((response) => {
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+
 
     return (
         <div>
@@ -86,6 +100,9 @@ export default function MovieOverview() : JSX.Element {
                     <h1>{data.original_title}</h1>
                     <div className="movie-overview__title__spoken-languages">
                         {data.spoken_languages.length > 0 && data.spoken_languages.map((language,index) => <div className="movie-overview__title__spoken-languages__language" key={index}><p>{language.english_name}</p></div>)}
+                    </div>
+                    <div className="movie-overview__title__spoken-languages">
+                        <div className="movie-overview__title__spoken-languages__language"><p><Moment format="DD-MM-YYYY">{data.release_date}</Moment></p></div>
                     </div>
                 </div>
                 <div className="movie-overview__description">

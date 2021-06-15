@@ -14,7 +14,7 @@ export default function MoviePoster({data,isOverview} : MoviePosterProps) : JSX.
     });
 
     return (
-        <Link href={`/movie/single/${data.id}`}>
+        <Link href={`/movie/${data.id}`}>
             <div className={handleClassNames}>
                 <img className="movie-poster__image" src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`} alt={data.original_title} />
                 <div className="movie-poster__overlay">

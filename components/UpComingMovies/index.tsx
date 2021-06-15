@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import MoviePoster from "../MoviePoster";
+import { apiKey } from "./../../appconfig";
 
 export default function UpComingMovies({maxItem}) : JSX.Element {
     const [page,setPage] = useState(1);
     const [data,setData] = useState([]);
     useEffect(() => {
         const api = async () => {
-            await axios.get(`https://api.themoviedb.org/3/movie/upcoming?api_key=acfc608a0a45e9649228005e83f3a421&language=en-US&page=${page}`).then((response) => {
+            await axios.get(`https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=${page}`).then((response) => {
                 setData([...response.data.results.slice(0,maxItem)]);
             }).catch((error) => {   
                 console.log(error);
@@ -18,7 +19,7 @@ export default function UpComingMovies({maxItem}) : JSX.Element {
     return (
         <React.Fragment>
             <div className="movies-list">
-                {data.length > 0 && data.map((movie,index) => <MoviePoster key={index} isReleased={false} data={movie} isOverview={false}/>)}
+                {data.length > 0 && data.map((movie,index) => <MoviePoster key={index} data={movie} isOverview={false}/>)}
             </div>
         </React.Fragment>
     );

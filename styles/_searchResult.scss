@@ -1,0 +1,39 @@
+.search-result {
+    padding: 2vw 5vw 0 5vw;
+
+    &__keywords {
+        margin-bottom: 25px;
+        h1 {
+            text-transform: uppercase;
+        }
+
+        p {
+            font-weight: bold;
+            font-size: 1.25em;
+            color:grey;
+        }
+    }
+
+    &__wrapper {
+        @include flex(row,flex-start,flex-start,10px);
+
+        &__filter, &__results-list {
+            @include shadow-border;
+            padding: 10px;
+        }
+
+        &__filter {
+            &__group {
+                @include flex(column,flex-start,flex-start,5px);
+                margin-bottom: 10px;
+                &__title {
+                    font-weight: bold;
+                }
+            }
+        }
+
+        &__results-list {
+            width: 100%;
+        }
+    }
+}
