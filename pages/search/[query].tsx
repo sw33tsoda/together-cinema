@@ -1,12 +1,14 @@
 import axios from 'axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { apiKey } from '../../appconfig';
 import Nav from '../../components/Nav';
 import LocaleCode from 'locale-code';
 import classnames from 'classnames';
 import Select from '../../components/Form/Select';
+import Link from 'next/link';
+import Moment from 'react-moment';
 
 const languages = LocaleCode.getLanguages(['en-US','de-DE','fr-FR','pt-PT','es-ES','ja-JP','zh-CN','ko-KR','vi-VN']).map((language) => ({label:language.name,value:language.code}));
 const years = Array.from({length:new Date().getFullYear() - 1900}).map((year:number,index:number) => {
@@ -25,6 +27,7 @@ const types  = [
 
 export default function SearchResult() {
     const router = useRouter();
+    const [result,setResult] = useState([]);
     const [filter,setFilter] = useState({
         type:'movie',
         language:languages[0].value,
@@ -33,10 +36,12 @@ export default function SearchResult() {
         year:years[0].value,
     });
 
+    console.log(result);
+
     useEffect(() => {
         const getSearchResult = async () => {
             axios.get(`https://api.themoviedb.org/3/search/${filter.type}?api_key=${apiKey}&language=${filter.language}&query=${router.query.query}&page=${filter.page}&include_adult=${filter.include_adult}&year=${filter.year}`).then((response) => {
-                console.log(response);
+                setResult([...response.data.results]);
             }).catch((error) => {
                 console.log(error);
             })
@@ -85,7 +90,60 @@ export default function SearchResult() {
                     </div>
 
                     <div className="search-result__wrapper__results-list">
-                        <h1>result</h1>
+                        <h1 className="search-result__wrapper__results-list__title">Kết quả ({result.length})</h1>
+                        <div className="search-result__wrapper__results-list__list">
+                            {(filter.type == "movie" && result.length > 0) && result.map((result,index) => (
+                                <Link href={`/movie/${result.id}`}>
+                                    <div className="result" key={index}>
+                                        <div className="result__title">
+                                            <h1>{result.original_title} (<Moment format="YYYY">{result.release_date}</Moment>)</h1>
+                                        </div>
+                                        <div className="result__overview">
+                                            {result.overview && result.overview.length > 0 ? (
+                                                <p>{result.overview.slice(0,300)}{result.overview.length > 300 && "..."}</p>
+                                            ) : (
+                                                <p>Không có mô tả.</p>
+                                            )}
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+
+                            {(filter.type == "person" && result.length > 0) && result.map((result,index) => (
+                                <Link href={`/person/${result.id}`}>
+                                    <div className="result" key={index}>
+                                        <div className="result__title">
+                                            <h1>{result.name}</h1>
+                                        </div>
+                                        <div className="result__overview">
+                                            {result.known_for && result.known_for.length && result.known_for.every(ele => ele.original_name == undefined) > 0 ? (
+                                                <p>Được biết đến qua {result.known_for.map((movie,index) => movie.original_title !== undefined && `${movie.original_title}${(index !== result.known_for.length - 1) ? ", " : "."}`)}</p>
+                                            ) : (
+                                                <p>Không xác định.</p>
+                                            )}
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))} 
+
+                            {(filter.type == "company" && result.length > 0) && result.map((result,index) => (
+                                <Link href={`/company/${result.id}`}>
+                                    <div className="result" key={index}>
+                                        <div className="result__title">
+                                            <h1>{result.name}</h1>
+
+                                        </div>
+                                        <div className="result__overview">
+                                            {result.origin_country && result.origin_country.length > 0 ? (
+                                                <p>{LocaleCode.getCountryName(`en-${result.origin_country}`)}</p>
+                                            ) : (
+                                                <p>Không xác định.</p>
+                                            )}
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))} 
+                        </div>
                     </div>
                 </div>
             </div>
