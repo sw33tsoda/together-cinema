@@ -20,6 +20,24 @@
     border-radius: 0.25em;
 }
 
+@mixin drop-shadow {
+    position: relative;
+    * {
+        z-index: 1000 !important;
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        border-radius: 0.25em;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        z-index: 0;
+    }
+}
+
 @mixin button-hover-fx {
     cursor: pointer;
     position: relative;

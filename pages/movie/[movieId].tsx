@@ -2,7 +2,6 @@ import axios from 'axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css"
@@ -102,7 +101,7 @@ export default function MovieOverview() : JSX.Element {
                         {data.spoken_languages.length > 0 && data.spoken_languages.map((language,index) => <div className="movie-overview__title__spoken-languages__language" key={index}><p>{language.english_name}</p></div>)}
                     </div>
                     <div className="movie-overview__title__spoken-languages">
-                        <div className="movie-overview__title__spoken-languages__language"><p><Moment format="DD-MM-YYYY">{data.release_date}</Moment></p></div>
+                        <div className="movie-overview__title__spoken-languages__language"><p><Moment format="DD-MM-YYYY" date={data.release_date}></Moment></p></div>
                     </div>
                 </div>
                 <div className="movie-overview__description">
