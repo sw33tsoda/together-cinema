@@ -31,27 +31,49 @@ export default function SearchResult() {
     const [filter,setFilter] = useState({
         type:'movie',
         language:languages[0].value,
-        page:1,
         include_adult:'false',
         year:years[0].value,
     });
+    const [pagination,setPagination] = useState({
+        page:1,
+        total_pages:0,
+        total_results:0,
+    });
 
-    console.log(result);
+    console.log(pagination);
 
     useEffect(() => {
-        const getSearchResult = async () => {
-            axios.get(`https://api.themoviedb.org/3/search/${filter.type}?api_key=${apiKey}&language=${filter.language}&query=${router.query.query}&page=${filter.page}&include_adult=${filter.include_adult}&year=${filter.year}`).then((response) => {
-                setResult([...response.data.results]);
-            }).catch((error) => {
-                console.log(error);
-            })
-        }
-        getSearchResult();
+        getSearchResult('first-load');
     },[router.query.query,filter]);
+    
+    const getSearchResult = async (action:string) => {
+        await axios.get(`https://api.themoviedb.org/3/search/${filter.type}?api_key=${apiKey}&language=${filter.language}&query=${router.query.query}&page=${action == 'load-more' ? pagination.page + 1 : pagination.page}&include_adult=${filter.include_adult}&year=${filter.year}`).then((response) => {
+            const { results, page, total_pages, total_results } = response.data;
+            setPagination({page,total_pages,total_results});
+            if (action == 'first-load') {
+                setResult([...results]);
+                // setPagination({...pagination,page:1});
+            };
+            if (action == 'load-more') setResult([...result,...results]);
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+    
+    const handleLoadMore = () => {
+        getSearchResult('load-more');
+    }
 
     const handleRadioClasses = (type:string) => classnames('radio__container__radio-button',{
         'radio__container__radio-button--active': type == filter.type
     });
+
+    const handleSetFilter = (filterType:string,value:string) => {
+        const newFilter = filter;
+        filter[filterType] = value;
+        setPagination({...pagination,page:1});
+        setFilter({...newFilter});
+    }
 
     return (
         <div>
@@ -72,7 +94,7 @@ export default function SearchResult() {
                             <div className="radio">
                                 {types.map((type,index) => (
                                     <label className="radio__container" key={index}>
-                                        <div className={handleRadioClasses(type.slug)} onClick={() => setFilter({...filter,type:type.slug})}>
+                                        <div className={handleRadioClasses(type.slug)} onClick={() => handleSetFilter('type',type.slug)}>
                                             <p>{type.name}</p>
                                         </div>
                                     </label>
@@ -81,11 +103,11 @@ export default function SearchResult() {
                         </div>
                         <div className="search-result__wrapper__filter__group">
                             <p className="search-result__wrapper__filter__group__title">Ngôn ngữ</p>
-                            <Select handleSetState={(value:string) => setFilter({...filter,language:value})} selected={filter.language} data={languages}/>
+                            <Select handleSetState={(value:string) => handleSetFilter('language',value)} selected={filter.language} data={languages}/>
                         </div>
                         <div className="search-result__wrapper__filter__group">
                             <p className="search-result__wrapper__filter__group__title">Năm</p>
-                            <Select handleSetState={(value:string) => setFilter({...filter,year:value})} selected={filter.year} data={years}/>
+                            <Select handleSetState={(value:string) => handleSetFilter('year',value)} selected={filter.year} data={years}/>
                         </div>
                     </div>
 
@@ -93,10 +115,10 @@ export default function SearchResult() {
                         <h1 className="search-result__wrapper__results-list__title">Kết quả ({result.length})</h1>
                         <div className="search-result__wrapper__results-list__list">
                             {(filter.type == "movie" && result.length > 0) && result.map((result,index) => (
-                                <Link href={`/movie/${result.id}`}>
-                                    <div className="result" key={index}>
+                                <Link href={`/movie/${result.id}`} key={index}>
+                                    <div className="result">
                                         <div className="result__title">
-                                            <h1>{result.original_title} (<Moment format="YYYY">{result.release_date}</Moment>)</h1>
+                                            <h1>{result.original_title} (<Moment format="YYYY" date={result.release_date}></Moment>)</h1>
                                         </div>
                                         <div className="result__overview">
                                             {result.overview && result.overview.length > 0 ? (
@@ -110,8 +132,8 @@ export default function SearchResult() {
                             ))}
 
                             {(filter.type == "person" && result.length > 0) && result.map((result,index) => (
-                                <Link href={`/person/${result.id}`}>
-                                    <div className="result" key={index}>
+                                <Link href={`/person/${result.id}`} key={index}>
+                                    <div className="result">
                                         <div className="result__title">
                                             <h1>{result.name}</h1>
                                         </div>
@@ -127,8 +149,8 @@ export default function SearchResult() {
                             ))} 
 
                             {(filter.type == "company" && result.length > 0) && result.map((result,index) => (
-                                <Link href={`/company/${result.id}`}>
-                                    <div className="result" key={index}>
+                                <Link href={`/company/${result.id}`} key={index}>
+                                    <div className="result">
                                         <div className="result__title">
                                             <h1>{result.name}</h1>
 
@@ -144,6 +166,9 @@ export default function SearchResult() {
                                 </Link>
                             ))} 
                         </div>
+                        {pagination.page < pagination.total_pages && <div className="search-result__wrapper__results-list__load-more" onClick={handleLoadMore}>
+                            <p>Tải thêm kết quả</p>
+                        </div>}
                     </div>
                 </div>
             </div>

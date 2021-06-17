@@ -45,6 +45,14 @@
             &__list {
                 @include flex(column,flex-start,flex-start,0px,10px);
             }
+
+            &__load-more {
+                padding: 5px;
+                text-align: center;
+                font-weight: bold;
+                margin-top:10px;
+                @include button-hover-fx;
+            }
         }
     }
 }
