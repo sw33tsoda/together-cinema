@@ -18,13 +18,32 @@
                 color:orangered;
             }
         }
+
+        &:first-child & {
+            @include breakpoints(mobile) {
+                &__nav-items-wrapper {
+                    display: none;
+                }
+            }
+        }
+
+        &:last-child {
+            @include breakpoints(mobile,tablet) {
+                p {
+                    display: none;
+                }
+            }
+        }
+
         &__nav-items-wrapper {
             // height: inherit;
+
             @include flex(row,space-between,center);
             &__nav-item {
                 @include flex(row,space-between,center);
                 height: 35px;
                 padding: 0 10px 0 10px;
+
                 p {
                     height: inherit;
                     display: flex;

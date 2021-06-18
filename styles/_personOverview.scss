@@ -1,6 +1,16 @@
 .person-overview {
     padding: 2vw 5vw 0 5vw;
-    @include flex(row,flex-start,flex-start,25px);
+    @include flex(row,flex-start,flex-start,25px,10px);
+    @include breakpoints(mobile) {
+        flex-direction: column !important;
+        &__information {
+            width: 100% !important;
+        }
+
+        &__profile {
+            width: 100% !important;
+        }
+    }
     &__profile {
         width: 15vw;
         img {
@@ -21,7 +31,7 @@
         @include flex(column,flex-start,flex-start,5px,10px);
 
         &__name {
-            font-size: 1.25vw;
+            // font-size: 1.25vw;
             width: 100%;
             border-bottom: 1px solid silver;
             padding-bottom: 10px;
@@ -34,7 +44,8 @@
             &__additional {
                 padding: 2.5px 5px 5px 5px;
                 h1 {
-                    font-size: 1.5vw;
+                    // font-size: 1.5vw;
+                    font-size: 1.25em;
                 }
             }
 
@@ -54,6 +65,11 @@
 .person-related-movies {
     padding: 2vw 5vw 0 5vw;
     width: 100%;
+    @include breakpoints(mobile) {
+        &__list {
+            grid-template-columns: 1fr 1fr 1fr !important;
+        }
+    }
     &__title {
         text-transform: uppercase;
         margin-bottom: 10px;

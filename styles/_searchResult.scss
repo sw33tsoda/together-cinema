@@ -16,6 +16,9 @@
 
     &__wrapper {
         @include flex(row,flex-start,flex-start,10px);
+        @include breakpoints(mobile) {
+            @include flex(column,center,center,10px,10px);
+        }
 
         &__filter, &__results-list {
             @include shadow-border;
@@ -24,6 +27,9 @@
         }
         
         &__filter {
+            @include breakpoints(mobile) {
+                width: 100%;
+            }
             &__group {
                 @include flex(column,flex-start,flex-start,5px);
                 margin-bottom: 10px;

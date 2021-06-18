@@ -2,6 +2,19 @@
     @include flex(column,flex-start,flex-start,25px,10px);
     &__author-profile {
         @include flex(row,flex-start,center,10px,0);
+        @include breakpoints(mobile) {
+            &__image {
+                width: 50px !important;
+                height: 50px !important;
+                font-size: 1.5em !important;
+            }
+            &__name {
+                font-size: 1em !important;
+                span {
+                    font-size: 0.85em !important;
+                }
+            }
+        }
         &__image {
             width: 4vw;
             height: 4vw;
@@ -36,7 +49,7 @@
         }
         &__content {
             font-style: italic;
-            font-size: 1.25vw;
+            // font-size: 1.25vw;
             p {
                 display: inline;
             }

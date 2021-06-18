@@ -12,6 +12,10 @@
     }
 
     &__wrapper {
+        @include breakpoints(mobile) {
+            width: 100%;
+            // padding: 10px;
+        }
         position: absolute;
         width: 30vw;
         height: auto;
