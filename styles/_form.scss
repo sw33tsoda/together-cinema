@@ -77,7 +77,7 @@
     &__options-list {
         display:none;
         position: absolute;
-        z-index: 1000;
+        z-index: 1000 !important;
         background-color: whitesmoke;
         width: calc(100% - 10px);
         overflow-y:scroll;

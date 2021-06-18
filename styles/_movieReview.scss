@@ -29,6 +29,11 @@
         border:1px solid silver;
         border-radius: 0.25em;
         padding: 10px;
+        @include drop-shadow;
+        * { 
+            position: relative;
+            z-index: 1000;
+        }
         &__content {
             font-style: italic;
             font-size: 1.25vw;

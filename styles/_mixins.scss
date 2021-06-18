@@ -22,9 +22,6 @@
 
 @mixin drop-shadow {
     position: relative;
-    * {
-        z-index: 1000 !important;
-    }
     &::before {
         content: "";
         position: absolute;
