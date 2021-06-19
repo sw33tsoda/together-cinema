@@ -13,6 +13,7 @@ import MovieReview from '../../components/MovieReview';
 import Nav from '../../components/Nav';
 import { apiKey } from '../../appconfig';
 import Link from 'next/link';
+import PageContent from '../../layouts/PageContent';
 SwiperCore.use([Pagination,Navigation]);
 
 export default function MovieOverview() : JSX.Element {
@@ -91,81 +92,83 @@ export default function MovieOverview() : JSX.Element {
                 <title>{data.original_title}</title>
             </Head>
             <Nav/>
-            <div className="movie-overview">
-                <div className="movie-overview__backdrop" style={{backgroundImage:`url(https://image.tmdb.org/t/p/w1280/${data.backdrop_path})`}}/>
-                <div className="movie-overview__poster">
-                    <img className="movie-overview__poster__image" src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`} alt={data.original_title} />
+            <PageContent>
+                <div className="movie-overview">
+                    <div className="movie-overview__backdrop" style={{backgroundImage:`url(https://image.tmdb.org/t/p/w1280/${data.backdrop_path})`}}/>
+                    <div className="movie-overview__poster">
+                        <img className="movie-overview__poster__image" src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`} alt={data.original_title} />
+                    </div>
+                    <div className="movie-overview__title">
+                        <h1>{data.original_title}</h1>
+                        <div className="movie-overview__title__spoken-languages">
+                            {data.spoken_languages.length > 0 && data.spoken_languages.map((language,index) => <div className="movie-overview__title__spoken-languages__language" key={index}><p>{language.english_name}</p></div>)}
+                        </div>
+                        <div className="movie-overview__title__spoken-languages">
+                            <div className="movie-overview__title__spoken-languages__language"><p><Moment format="DD-MM-YYYY" date={data.release_date}></Moment></p></div>
+                        </div>
+                    </div>
+                    <div className="movie-overview__description">
+                        <div className="movie-overview__description__score">
+                            <h1>{data.vote_average}/10<span>{data.vote_count} votes</span></h1>
+                        </div>
+                        <div className="movie-overview__description__genres">
+                            {data.genres.length > 0 && data.genres.map((genre,index) => <div className="movie-overview__description__genres__genre" key={index}><p>{genre.name}</p></div>)}
+                        </div>
+                        <div className="movie-overview__description__production-companies">
+                            {data.production_companies.length > 0 && data.production_companies.map((company,index) => <div className="movie-overview__description__production-companies__company" key={index}><img src={`https://image.tmdb.org/t/p/w500/${company.logo_path}`}/></div>)}
+                        </div>
+                        <p className="movie-overview__description__overview">{data.overview}</p>
+                    </div>
                 </div>
-                <div className="movie-overview__title">
-                    <h1>{data.original_title}</h1>
-                    <div className="movie-overview__title__spoken-languages">
-                        {data.spoken_languages.length > 0 && data.spoken_languages.map((language,index) => <div className="movie-overview__title__spoken-languages__language" key={index}><p>{language.english_name}</p></div>)}
-                    </div>
-                    <div className="movie-overview__title__spoken-languages">
-                        <div className="movie-overview__title__spoken-languages__language"><p><Moment format="DD-MM-YYYY" date={data.release_date}></Moment></p></div>
-                    </div>
-                </div>
-                <div className="movie-overview__description">
-                    <div className="movie-overview__description__score">
-                        <h1>{data.vote_average}/10<span>{data.vote_count} votes</span></h1>
-                    </div>
-                    <div className="movie-overview__description__genres">
-                        {data.genres.length > 0 && data.genres.map((genre,index) => <div className="movie-overview__description__genres__genre" key={index}><p>{genre.name}</p></div>)}
-                    </div>
-                    <div className="movie-overview__description__production-companies">
-                        {data.production_companies.length > 0 && data.production_companies.map((company,index) => <div className="movie-overview__description__production-companies__company" key={index}><img src={`https://image.tmdb.org/t/p/w500/${company.logo_path}`}/></div>)}
-                    </div>
-                    <p className="movie-overview__description__overview">{data.overview}</p>
-                </div>
-            </div>
 
-            <div className="movie-actors">
-                <h1 className="movie-actors__title">Diễn viên</h1>
-                <div className="movie-actors__slider">
-                    <Swiper slidesPerView={6} spaceBetween={5} slidesPerGroup={3} loopFillGroupWithBlank={true} pagination={{"clickable": true,"renderBullet":() => ""}} navigation={true} className="actors-slider">
-                        {cast.length > 0 && cast.map((actor,index) => (
-                            <SwiperSlide key={index}>
-                                <Link href={`/person/${actor.id}`}>
-                                    <div className="movie-actors__slider__slide">
-                                        <div className="movie-actors__slider__slide__profile">
-                                            <img className="movie-actors__slider__slide__profile__image" src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}/>
+                <div className="movie-actors">
+                    <h1 className="movie-actors__title">Diễn viên</h1>
+                    <div className="movie-actors__slider">
+                        <Swiper slidesPerView={6} spaceBetween={5} slidesPerGroup={3} loopFillGroupWithBlank={true} pagination={{"clickable": true,"renderBullet":() => ""}} navigation={true} className="actors-slider">
+                            {cast.length > 0 && cast.map((actor,index) => (
+                                <SwiperSlide key={index}>
+                                    <Link href={`/person/${actor.id}`}>
+                                        <div className="movie-actors__slider__slide">
+                                            <div className="movie-actors__slider__slide__profile">
+                                                <img className="movie-actors__slider__slide__profile__image" src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}/>
+                                            </div>
+                                            <p className="movie-actors__slider__slide__character">{actor.character}</p>
+                                            <p className="movie-actors__slider__slide__name">{actor.name}</p>
                                         </div>
-                                        <p className="movie-actors__slider__slide__character">{actor.character}</p>
-                                        <p className="movie-actors__slider__slide__name">{actor.name}</p>
-                                    </div>
-                                </Link>
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
+                                    </Link>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    </div>
                 </div>
-            </div>
 
-            <div className="split-wrapper">
-                <div className="movie-reviews">
-                    <h1 className="movie-reviews__title">Đánh giá</h1>
-                    {reviews.length > 0 ? (
-                        <div className="movie-reviews__list">
-                            {reviews.length > 0 && reviews.map((review,index) => <MovieReview data={review} key={index}/>)}
-                        </div>
-                    ) : (
-                        <div className="movie-reviews__empty">
-                            <h1>Không có đánh giá</h1>
-                        </div>
-                    )}
+                <div className="split-wrapper">
+                    <div className="movie-reviews">
+                        <h1 className="movie-reviews__title">Đánh giá</h1>
+                        {reviews.length > 0 ? (
+                            <div className="movie-reviews__list">
+                                {reviews.length > 0 && reviews.map((review,index) => <MovieReview data={review} key={index}/>)}
+                            </div>
+                        ) : (
+                            <div className="movie-reviews__empty">
+                                <h1>Không có đánh giá</h1>
+                            </div>
+                        )}
+                    </div>
+                    <div className="movie-similar">
+                        <h1 className="movie-similiar__title">Cùng thể loại</h1>
+                        {similiarMovies.length > 0 ? (
+                            <div className="movie-similiar__list">
+                                {similiarMovies.length > 0 && similiarMovies.map((movie,index) => <MoviePoster isOverview={false} data={movie} key={index}/>)}
+                            </div>
+                        ) : (
+                            <div className="movie-similiar__empty">
+                                <h1>Không có phim tương tự</h1>
+                            </div>
+                        )}
+                    </div>
                 </div>
-                <div className="movie-similar">
-                    <h1 className="movie-similiar__title">Cùng thể loại</h1>
-                    {similiarMovies.length > 0 ? (
-                        <div className="movie-similiar__list">
-                            {similiarMovies.length > 0 && similiarMovies.map((movie,index) => <MoviePoster isOverview={false} data={movie} key={index}/>)}
-                        </div>
-                    ) : (
-                        <div className="movie-similiar__empty">
-                            <h1>Không có phim tương tự</h1>
-                        </div>
-                    )}
-                </div>
-            </div>
+            </PageContent>
         </div>
     );
 }

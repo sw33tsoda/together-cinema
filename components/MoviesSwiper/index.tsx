@@ -28,8 +28,13 @@ export default function MoviesSwiper({data}:MoviesSwiperProps) : JSX.Element {
                                 </div>
                             </Link>
                             <div className="movies-swiper__item__overview">
-                                <h1 className="movies-swiper__item__overview__title">{movie.original_title}</h1>
-                                <p className="movies-swiper__item__overview__overview">{movie.overview}</p>
+                                <div className="movies-swiper__overview-wrapper">
+                                    <h1 className="movies-swiper__item__overview__title">{movie.original_title}</h1>
+                                    <p className="movies-swiper__item__overview__overview">{movie.overview}</p>
+                                </div>
+                                <div className="movies-swiper__button">
+                                    <p>Trailer</p>
+                                </div>
                             </div>
                         </div>
                     </SwiperSlide>

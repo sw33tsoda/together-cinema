@@ -4,7 +4,8 @@ import MoviesList from '../components/MoviesList';
 import NowPlayingMoviesSwiper from '../components/NowPlayingMoviesSwiper';
 import SectionTitle from '../components/SectionTitle';
 import styles from '/styles/Home.module.css'
-
+import VideoPlayer from '../components/VideoPlayer';
+import PageContent from '../layouts/PageContent';
 
 export default function Home() {
   return (
@@ -15,11 +16,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Nav/>
-      <NowPlayingMoviesSwiper/>
-      <SectionTitle title="Đang chiếu" engTitle="Now Playing"/>
-      <MoviesList maxItem={10} status="now_playing"/>
-      <SectionTitle title="Sắp chiếu" engTitle="Upcoming"/>
-      <MoviesList maxItem={20} status="upcoming"/>
+      <PageContent>
+        <NowPlayingMoviesSwiper/>
+        <SectionTitle title="Đang chiếu" engTitle="Now Playing"/>
+        <MoviesList maxItem={10} status="now_playing"/>
+        <SectionTitle title="Sắp chiếu" engTitle="Upcoming"/>
+        <MoviesList maxItem={20} status="upcoming"/>
+        <MoviesList maxItem={20} status="latest"/>
+        <VideoPlayer/>
+      </PageContent>
     </div>
   )
 }

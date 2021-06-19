@@ -19,6 +19,7 @@ a {
   margin: 0;
 }
 
+@import 'variables.scss';
 @import 'mixins.scss';
 @import 'nav.scss';
 @import 'moviesList.scss';
@@ -29,6 +30,7 @@ a {
 @import 'personOverview.scss';
 @import 'swiper.scss';
 @import 'nowPlayingMovies.scss';
+@import 'pages.scss';
 
 #home {
   width: 100%;
@@ -43,7 +45,7 @@ a {
   font-size: 10pt;
   font-weight: bold;
   text-transform: uppercase;
-  @include flex(row,flex-start,center,15px);
+  @include flex(row,flex-start,center,0px);
   @include breakpoints(mobile) {
       flex-direction: column !important;
       font-size: 14pt !important;
@@ -70,10 +72,10 @@ a {
   &__eng-title {
     font-size: 10pt;
     width: 100%;
-    color: whitesmoke;
+    color: orangered;
     padding: 5px 10px 5px 10px;
     border-radius: 0.25em;
-    background-color: orangered;
-    @include drop-shadow;
+    // background-color: orangered;
+    // @include drop-shadow;
   }
 }

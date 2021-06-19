@@ -14,7 +14,8 @@ export default function MoviesList({maxItem,status}:MoviesListProps) : JSX.Eleme
     useEffect(() => {
         const api = async () => {
             await axios.get(`https://api.themoviedb.org/3/movie/${status}?api_key=${apiKey}&language=en-US&page=${page}`).then((response) => {
-                setData([...response.data.results.slice(0,maxItem)]);
+                if (response.data.results)
+                    setData([...response.data.results.slice(0,maxItem)]);
             }).catch((error) => {   
                 console.log(error);
             })

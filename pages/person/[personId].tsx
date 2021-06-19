@@ -6,6 +6,7 @@ import { apiKey } from '../../appconfig';
 import Nav from '../../components/Nav';
 import Moment from 'react-moment';
 import MoviePoster from '../../components/MoviePoster';
+import PageContent from '../../layouts/PageContent';
 
 // type PersonOverviewProps = {
 //     personId:number,
@@ -86,64 +87,66 @@ export default function PersonOverview() : JSX.Element {
                 <title>{data.name}</title>
             </Head>
             <Nav/>
-            <div className="person-overview">
-                <div className="person-overview__profile">
-                    <img src={`https://image.tmdb.org/t/p/w500/${data.profile_path}`} alt={data.name} />
-                </div>
-                <div className="person-overview__information">
-                    <div className="person-overview__information__name">
-                        <h1>{data.name}</h1>
+            <PageContent>
+                <div className="person-overview">
+                    <div className="person-overview__profile">
+                        <img src={`https://image.tmdb.org/t/p/w500/${data.profile_path}`} alt={data.name} />
                     </div>
-                    <div className="person-overview__information__wrapper">
-                        <div className="person-overview__information__wrapper__additional">
-                            <h1>Ngày sinh</h1>
-                            <p><Moment format="DD/MM/YYYY" date={data.birthday}></Moment></p>
+                    <div className="person-overview__information">
+                        <div className="person-overview__information__name">
+                            <h1>{data.name}</h1>
                         </div>
-                        <div className="person-overview__information__wrapper__additional">
-                            <h1>Nơi sinh</h1>
-                            <p>{data.place_of_birth}</p>
-                        </div>
-                        <div className="person-overview__information__wrapper__additional">
-                            <h1>Nghề nghiệp</h1>
-                            <p>{data.known_for_department}</p>
-                        </div>
-                    </div>
-                    <div className="person-overview__information__wrapper">
-                        <div className="person-overview__information__wrapper__additional">
-                            <h1>Tiểu sử</h1>
-                            <p>{data.biography.length > 0 ? data.biography + "." : "Không có."}</p>
-                        </div>
-                        <div className="person-overview__information__wrapper__additional">
-                            <h1>Các tên gọi khác</h1>
-                            <p>{data.also_known_as.length > 0 ? data.also_known_as.join(', ') + "." : "Không có."}</p>
-                        </div>
-                        <div className="person-overview__information__wrapper__additional">
-                            <h1>Lượt thích</h1>
-                            <p>{data.popularity}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="person-related-movies">
-                <div className="person-related-movies__title">
-                    <h1>Phim đã tham gia</h1>
-                </div>
-                <div className="person-related-movies__list">
-                    {relatedMovies.length > 0 ? (
-                        relatedMovies.map((movie,index) => (
-                            <div className="person-related-movies__list__movie">
-                                <div className="person-related-movies__list__movie__poster">
-                                    <MoviePoster isOverview={false} data={movie} key={index}/>
-                                </div>
-                                <p className="person-related-movies__list__movie__cast">{movie.character}</p>
+                        <div className="person-overview__information__wrapper">
+                            <div className="person-overview__information__wrapper__additional">
+                                <h1>Ngày sinh</h1>
+                                <p><Moment format="DD/MM/YYYY" date={data.birthday}></Moment></p>
                             </div>
-                        ))
-                    ) : (
-                        <p>Chưa tham gia phim nào.</p>
-                    )}
+                            <div className="person-overview__information__wrapper__additional">
+                                <h1>Nơi sinh</h1>
+                                <p>{data.place_of_birth}</p>
+                            </div>
+                            <div className="person-overview__information__wrapper__additional">
+                                <h1>Nghề nghiệp</h1>
+                                <p>{data.known_for_department}</p>
+                            </div>
+                        </div>
+                        <div className="person-overview__information__wrapper">
+                            <div className="person-overview__information__wrapper__additional">
+                                <h1>Tiểu sử</h1>
+                                <p>{data.biography.length > 0 ? data.biography + "." : "Không có."}</p>
+                            </div>
+                            <div className="person-overview__information__wrapper__additional">
+                                <h1>Các tên gọi khác</h1>
+                                <p>{data.also_known_as.length > 0 ? data.also_known_as.join(', ') + "." : "Không có."}</p>
+                            </div>
+                            <div className="person-overview__information__wrapper__additional">
+                                <h1>Lượt thích</h1>
+                                <p>{data.popularity}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <div className="person-related-movies">
+                    <div className="person-related-movies__title">
+                        <h1>Phim đã tham gia</h1>
+                    </div>
+                    <div className="person-related-movies__list">
+                        {relatedMovies.length > 0 ? (
+                            relatedMovies.map((movie,index) => (
+                                <div className="person-related-movies__list__movie">
+                                    <div className="person-related-movies__list__movie__poster">
+                                        <MoviePoster isOverview={false} data={movie} key={index}/>
+                                    </div>
+                                    <p className="person-related-movies__list__movie__cast">{movie.character}</p>
+                                </div>
+                            ))
+                        ) : (
+                            <p>Chưa tham gia phim nào.</p>
+                        )}
+                    </div>
             </div>
+            </PageContent>
         </div>
     );
 }

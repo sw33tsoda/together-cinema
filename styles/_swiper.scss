@@ -1,6 +1,7 @@
 .movies-swiper {
     height: 500px;
     @include drop-shadow;
+    background-color: #212121;
 
     * {
         position: relative;
@@ -13,10 +14,11 @@
             padding: 90px !important;
             padding-top: 30px !important;
             flex-direction: column !important;
-
+            
             &__overview {
                 width: 100%;
                 text-align: center;
+                align-items: center !important;
                 &__title {
                     font-size: 1.25em;
                 }
@@ -27,8 +29,12 @@
             }
         }
 
-    }
+        &__button {
+            display: none;
+        }
 
+    }
+    
     &__item {
         height: 100%;
         width: 100%;
@@ -53,11 +59,26 @@
             }
         }
 
+
         &__overview {
-            flex-basis: 50vw;
+            flex-basis: 65vw;
             // float:right;
             color:whitesmoke;
             text-shadow: rgba(0, 0, 0, 0.5) 1.95px 1.95px 2.6px;
+            @include flex(column,space-around,flex-start,10px,10px);
+            height: 100%;
+        }
+    }
+
+    &__button {
+        color:#212121;
+        background-color: whitesmoke;
+        padding: 10px;
+        text-transform: uppercase;
+        font-weight: bold;
+        @include button-hover-fx;
+        &:hover {
+            @include button-hover-fx-active;
         }
     }
 }
