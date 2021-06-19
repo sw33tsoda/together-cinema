@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import Nav from '../components/Nav'
-import UpComingMovies from '../components/UpComingMovies';
-import NowPlayingMovies from '../components/NowPlayingMovies';
+import MoviesList from '../components/MoviesList';
+import NowPlayingMoviesSwiper from '../components/NowPlayingMoviesSwiper';
+import SectionTitle from '../components/SectionTitle';
 import styles from '/styles/Home.module.css'
 
 
@@ -14,8 +15,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Nav/>
-      <NowPlayingMovies/>
-      <UpComingMovies maxItem={12}/>
+      <NowPlayingMoviesSwiper/>
+      <SectionTitle title="Đang chiếu" engTitle="Now Playing"/>
+      <MoviesList maxItem={10} status="now_playing"/>
+      <SectionTitle title="Sắp chiếu" engTitle="Upcoming"/>
+      <MoviesList maxItem={20} status="upcoming"/>
     </div>
   )
 }

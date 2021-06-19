@@ -1,5 +1,33 @@
 .movies-swiper {
     height: 500px;
+    @include drop-shadow;
+
+    * {
+        position: relative;
+        z-index: 1000;
+    }
+    @include breakpoints(mobile) {
+        height: 425px;
+        &__item {
+            background-position: center !important;
+            padding: 90px !important;
+            padding-top: 30px !important;
+            flex-direction: column !important;
+
+            &__overview {
+                width: 100%;
+                text-align: center;
+                &__title {
+                    font-size: 1.25em;
+                }
+
+                &__overview {
+                    display: none;
+                }
+            }
+        }
+
+    }
 
     &__item {
         height: 100%;
@@ -10,13 +38,14 @@
         // padding: 0 60px 0 60px;
         padding: 60px;
         @include flex(row,flex-start,flex-start,50px,10px);
-
+        
         &__poster, &__overview {
 
         }
 
         &__poster {
             @include drop-shadow;
+            cursor: pointer;
             flex-basis: 250px;
             &__image {
                 vertical-align: middle;
@@ -28,6 +57,19 @@
             flex-basis: 50vw;
             // float:right;
             color:whitesmoke;
+            text-shadow: rgba(0, 0, 0, 0.5) 1.95px 1.95px 2.6px;
         }
     }
 }
+
+.swiper-pagination-bullet-active-main {
+    background-color: orangered !important;
+}
+
+.swiper-pagination-bullet-active-prev,
+.swiper-pagination-bullet-active-prev-prev,
+.swiper-pagination-bullet-active-next,
+.swiper-pagination-bullet-active-next-next {
+    background-color: orangered !important;
+}
+

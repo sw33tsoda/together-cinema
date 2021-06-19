@@ -1,12 +1,13 @@
 .movies-list {
-    padding: 5px 10px 5px 10px;
-    width: 100%;
-    @include grid(6,1fr);
+    max-width: 1150px;
+    margin:auto;
+    @include grid(5,1fr);
     @include breakpoints(pc) {
         // @include grid(12,1fr);
     }
     @include breakpoints(mobile) {
-        @include grid(3,1fr);
+        padding: 5px 10px 5px 10px;
+        @include grid(2,1fr);
     }
 }
 
@@ -320,7 +321,7 @@
             z-index: 2;
             h1 {
                 text-shadow: 0.5px 0.5px orangered;
-                font-size: 1.5vw;
+                font-size: 1vw;
             }
             p {
                 // font-weight: bold;

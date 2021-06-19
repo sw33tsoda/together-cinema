@@ -20,7 +20,7 @@ export interface NowPlayingMoviesObject {
     vote_average?:number,
 }
 
-export default function NowPlayingMovies() : JSX.Element {
+export default function NowPlayingMoviesSwiper() : JSX.Element {
     const [data,setData] = useState<Array<NowPlayingMoviesObject>>([]);
     useEffect(() => {
         getNowPlayingMovies();
@@ -36,7 +36,7 @@ export default function NowPlayingMovies() : JSX.Element {
 
     return (
         <React.Fragment>
-            <div className="now-playing-movies">
+            <div className="now-playing-movies-swiper">
                 <MoviesSwiper data={data}/>
             </div>
         </React.Fragment>
