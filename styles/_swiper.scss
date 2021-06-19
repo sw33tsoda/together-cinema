@@ -1,0 +1,33 @@
+.movies-swiper {
+    height: 500px;
+
+    &__item {
+        height: 100%;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-position-y: -5vw;
+        background-size:cover;
+        // padding: 0 60px 0 60px;
+        padding: 60px;
+        @include flex(row,flex-start,flex-start,50px,10px);
+
+        &__poster, &__overview {
+
+        }
+
+        &__poster {
+            @include drop-shadow;
+            flex-basis: 250px;
+            &__image {
+                vertical-align: middle;
+                width: 100%;
+            }
+        }
+
+        &__overview {
+            flex-basis: 50vw;
+            // float:right;
+            color:whitesmoke;
+        }
+    }
+}

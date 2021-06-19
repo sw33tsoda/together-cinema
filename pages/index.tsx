@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import Nav from '../components/Nav'
-import UpComingMovies from '../components/UpComingMovies'
+import UpComingMovies from '../components/UpComingMovies';
+import NowPlayingMovies from '../components/NowPlayingMovies';
 import styles from '/styles/Home.module.css'
+
 
 export default function Home() {
   return (
@@ -12,6 +14,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Nav/>
+      <NowPlayingMovies/>
       <UpComingMovies maxItem={12}/>
     </div>
   )
