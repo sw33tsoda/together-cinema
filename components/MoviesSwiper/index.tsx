@@ -8,6 +8,11 @@ import SwiperCore, {
 import { NowPlayingMoviesObject } from "../NowPlayingMoviesSwiper";
 SwiperCore.use([Autoplay,Pagination]);
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+import { setToggleVideoPlayer } from "../../redux/slices/videoPlayerSlice";
+import axios from "axios";
+import { apiKey } from "../../appconfig";
 
 type MoviesSwiperProps = {
     data:Array<
@@ -16,6 +21,18 @@ type MoviesSwiperProps = {
 }
 
 export default function MoviesSwiper({data}:MoviesSwiperProps) : JSX.Element {
+    const dispatch = useDispatch<AppDispatch>();
+    const handleViewVideo = async (id:string | number) => {
+        try {
+            const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}&language=en-US`);
+            const data = await response.data;
+            dispatch(setToggleVideoPlayer(data.results));
+        } catch (error) {
+            console.log(error.response);
+            return error.response;
+        }
+    };
+
     return (
         <div className="movies-swiper">
             <Swiper pagination={{"dynamicBullets": true}} autoplay={{delay:2500}} className="movies-swiper">
@@ -32,7 +49,7 @@ export default function MoviesSwiper({data}:MoviesSwiperProps) : JSX.Element {
                                     <h1 className="movies-swiper__item__overview__title">{movie.original_title}</h1>
                                     <p className="movies-swiper__item__overview__overview">{movie.overview}</p>
                                 </div>
-                                <div className="movies-swiper__button">
+                                <div className="movies-swiper__button" onClick={() => handleViewVideo(movie.id)}>
                                     <p>Trailer</p>
                                 </div>
                             </div>

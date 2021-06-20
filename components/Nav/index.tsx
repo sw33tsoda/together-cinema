@@ -1,11 +1,12 @@
 import Link from 'next/link';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setToggleSearchModel } from '../../redux/slices/searchSlice';
 import { AppDispatch, RootState } from '../../redux/store';
 import SearchModal from '../SearchModal';
+import VideoPlayer from '../VideoPlayer';
 
 export default function Nav() : JSX.Element {
-    const search = useSelector((state:RootState) => state.search);
+    // const search = useSelector((state:RootState) => state.search);
     const dispatch:AppDispatch = useDispatch();
 
     return (
@@ -47,6 +48,7 @@ export default function Nav() : JSX.Element {
                 </div>
             </div>
             <SearchModal/>
+            <VideoPlayer/>
         </div>
     );
 }

@@ -4,19 +4,26 @@ const videoPlayerSlice = createSlice({
     name:'video-player',
     initialState: {
         toggle:false,
-        selectedVideoId:'',
+        videos:[],
+        selectedVideo:'',
     },
     reducers: {
-        setVideoPlayer:(state,action) => {
+        setToggleVideoPlayer: (state,action) => {
             state.toggle = true;
-            state.selectedVideoId = action.payload;
+            if (action.payload.length > 0) {
+                state.videos = [...action.payload];
+                state.selectedVideo = action.payload[0].key;
+            }
+        },
+        setVideo: (state,action) => {
+            state.selectedVideo = action.payload;
         },
         closeVideoPlayer:(state) => {
             state.toggle = false;
-            state.selectedVideoId = '';
+            state.videos = [];
         }
     }
 });
 
-export const { setVideoPlayer,closeVideoPlayer } = videoPlayerSlice.actions;
+export const { setToggleVideoPlayer,closeVideoPlayer,setVideo } = videoPlayerSlice.actions;
 export default videoPlayerSlice.reducer;
