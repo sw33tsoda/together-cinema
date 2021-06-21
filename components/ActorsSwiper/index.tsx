@@ -4,8 +4,7 @@ import "swiper/components/pagination/pagination.min.css"
 import "swiper/components/navigation/navigation.min.css"
 import SwiperCore, { Pagination,Navigation } from 'swiper/core';
 SwiperCore.use([Pagination,Navigation]);
-import Link from 'next/link';
-import ActorsSwiperItem from './../ActorsSwiperItem/';
+import ActorImage from './../ActorImage';
 
 type ActorsSwiperProps = {
     data:Array<ActorsListObject>,
@@ -27,9 +26,7 @@ export default function ActorsSwiper({data}:ActorsSwiperProps) {
                 <Swiper slidesPerView={6} spaceBetween={5} slidesPerGroup={3} loopFillGroupWithBlank={true} pagination={{"clickable": true,"renderBullet":() => ""}} navigation={true} className="actors-slider">
                     {data.length > 0 && data.map((actor,index) => (
                         <SwiperSlide key={index}>
-                            <Link href={`/person/${actor.id}`}>
-                                <ActorsSwiperItem profile_path={actor.profile_path} name={actor.name} character={actor.character}/>
-                            </Link>
+                            <ActorImage imageOnly={false} id={actor.id} profile_path={actor.profile_path} name={actor.name} character={actor.character}/>
                         </SwiperSlide>
                     ))}
                 </Swiper>

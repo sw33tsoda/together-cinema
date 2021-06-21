@@ -90,7 +90,8 @@ export default function MovieOverview() : JSX.Element {
                 <div className="movie-overview">
                     <div className="movie-overview__backdrop" style={{backgroundImage:`url(https://image.tmdb.org/t/p/w1280/${data.backdrop_path})`}}/>
                     <div className="movie-overview__poster">
-                        <img className="movie-overview__poster__image" src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`} alt={data.original_title} />
+                        <MoviePoster isOverview={true} data={data}/>
+                        {/* <img className="movie-overview__poster__image" src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`} alt={data.original_title} /> */}
                     </div>
                     <div className="movie-overview__title">
                         <h1>{data.original_title}</h1>

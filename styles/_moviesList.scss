@@ -12,7 +12,8 @@
 }
 
 .movie-actors {
-    padding: 0 5vw 0 5vw;
+    padding: 50px 5vw 50px 5vw;
+    background-color: white;
     &__title {
         text-transform: uppercase;
         margin-bottom: 10px;
@@ -270,7 +271,7 @@
         width: inherit;
         vertical-align: middle;
         transition: 1s ease-out;
-        filter: grayscale(85%);
+        // filter: grayscale(85%);
     }
 
     &:hover & {

@@ -7,6 +7,7 @@ import Nav from '../../components/Nav';
 import Moment from 'react-moment';
 import MoviePoster from '../../components/MoviePoster';
 import PageContent from '../../layouts/PageContent';
+import ActorImage from '../../components/ActorImage';
 
 // type PersonOverviewProps = {
 //     personId:number,
@@ -90,7 +91,7 @@ export default function PersonOverview() : JSX.Element {
             <PageContent>
                 <div className="person-overview">
                     <div className="person-overview__profile">
-                        <img src={`https://image.tmdb.org/t/p/w500/${data.profile_path}`} alt={data.name} />
+                        <ActorImage imageOnly={true} id={data.id} profile_path={data.profile_path} name={data.name} character={data.character}/>
                     </div>
                     <div className="person-overview__information">
                         <div className="person-overview__information__name">
