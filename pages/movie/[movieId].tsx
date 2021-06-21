@@ -2,19 +2,13 @@ import axios from 'axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper.min.css";
-import "swiper/components/pagination/pagination.min.css"
-import "swiper/components/navigation/navigation.min.css"
-import SwiperCore, { Pagination,Navigation } from 'swiper/core';
 import Moment from 'react-moment';
 import MoviePoster from '../../components/MoviePoster';
 import MovieReview from '../../components/MovieReview';
 import Nav from '../../components/Nav';
 import { apiKey } from '../../appconfig';
-import Link from 'next/link';
 import PageContent from '../../layouts/PageContent';
-SwiperCore.use([Pagination,Navigation]);
+import ActorsSwiper from '../../components/ActorsSwiper';
 
 export default function MovieOverview() : JSX.Element {
     const router = useRouter();
@@ -120,27 +114,8 @@ export default function MovieOverview() : JSX.Element {
                         <p className="movie-overview__description__overview">{data.overview}</p>
                     </div>
                 </div>
-
-                <div className="movie-actors">
-                    <h1 className="movie-actors__title">Diễn viên</h1>
-                    <div className="movie-actors__slider">
-                        <Swiper slidesPerView={6} spaceBetween={5} slidesPerGroup={3} loopFillGroupWithBlank={true} pagination={{"clickable": true,"renderBullet":() => ""}} navigation={true} className="actors-slider">
-                            {cast.length > 0 && cast.map((actor,index) => (
-                                <SwiperSlide key={index}>
-                                    <Link href={`/person/${actor.id}`}>
-                                        <div className="movie-actors__slider__slide">
-                                            <div className="movie-actors__slider__slide__profile">
-                                                <img className="movie-actors__slider__slide__profile__image" src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}/>
-                                            </div>
-                                            <p className="movie-actors__slider__slide__character">{actor.character}</p>
-                                            <p className="movie-actors__slider__slide__name">{actor.name}</p>
-                                        </div>
-                                    </Link>
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
-                    </div>
-                </div>
+                
+                <ActorsSwiper data={cast}/>
 
                 <div className="split-wrapper">
                     <div className="movie-reviews">

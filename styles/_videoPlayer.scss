@@ -17,6 +17,12 @@
         // padding-left: 50px;
         // padding-right: 50px;
     }
+    
+    &__close {
+        background-color: whitesmoke;
+        @include button-hover-fx;
+        padding: 20px;
+    }
 
     .play-list {
         border-radius: 0.25em;

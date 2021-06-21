@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import classnames from 'classnames';
-import { setVideo } from "../../redux/slices/videoPlayerSlice";
+import { closeVideoPlayer, setVideo } from "../../redux/slices/videoPlayerSlice";
 
 export default function VideoPlayer() {
     const video = useSelector((state:RootState) => state['video-player']);
@@ -31,6 +31,9 @@ export default function VideoPlayer() {
                         </div>
                     ))} 
                 </div>}
+                <div className="video-player__close" onClick={() => dispatch(closeVideoPlayer())}>
+                    <i className="fas fa-times"></i>
+                </div>
             </div>
         </div>
     );

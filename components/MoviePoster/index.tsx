@@ -13,10 +13,16 @@ export default function MoviePoster({data,isOverview} : MoviePosterProps) : JSX.
         "movie-poster--overview": isOverview == true,
     });
 
+    const handleOnError = (event:any) => {
+        event.target.src="/assets/images/film.jpg";
+        event.target.style.height="100%";
+        event.target.style.objectFit="cover";
+    }
+
     return (
         <Link href={`/movie/${data.id}`}>
             <div className={handleClassNames}>
-                <img className="movie-poster__image" src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`} alt={data.original_title} />
+                <img className="movie-poster__image" src={`https://image.tmdb.org/t/p/w500/${data.poster_path}`} alt={data.original_title} onError={handleOnError}/>
                 <div className="movie-poster__overlay">
                     <div className="movie-poster__overlay__info">
                         <h1>{data.original_title}</h1>

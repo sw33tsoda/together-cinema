@@ -18,7 +18,7 @@
         margin-bottom: 10px;
     }
 
-    &__slider {
+    &__swiper {
         &__slide {
             &:hover {
                 p {
@@ -246,6 +246,7 @@
     position: relative;
     z-index: 0;
     cursor: pointer;
+    background-color: grey;
 
     &--overview & {
         &__overlay {
