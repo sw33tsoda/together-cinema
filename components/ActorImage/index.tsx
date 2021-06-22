@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
 type ActorImageProps = {
-    profile_path:string,
-    character:string,
-    name:string,
-    id:(number | string),
-    imageOnly:boolean,
+    profile_path?:string,
+    character?:string,
+    name?:string,
+    id?:(number | string),
+    imageOnly?:boolean,
 }
 
 export default function ActorImage({profile_path,character,name,id,imageOnly}:ActorImageProps) : JSX.Element {

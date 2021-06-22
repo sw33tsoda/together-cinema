@@ -91,7 +91,7 @@ export default function PersonOverview() : JSX.Element {
             <PageContent>
                 <div className="person-overview">
                     <div className="person-overview__profile">
-                        <ActorImage imageOnly={true} id={data.id} profile_path={data.profile_path} name={data.name} character={data.character}/>
+                        <ActorImage imageOnly={true} id={data.id} profile_path={data.profile_path} name={data.name}/>
                     </div>
                     <div className="person-overview__information">
                         <div className="person-overview__information__name">
