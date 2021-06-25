@@ -9,7 +9,6 @@ export default function VideoPlayer() {
     const handleVideoPlayerClassNames = classnames("video-player",{
         "video-player--show":video.toggle,
     });
-    console.log(video.videos);
     const handleActivePlayListItemClassNames = (key:string) => classnames("play-list__item",{
         "play-list__item--active":key == video.selectedVideo,
     });

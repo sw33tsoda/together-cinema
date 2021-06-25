@@ -5,15 +5,15 @@ import { apiKey } from "../../appconfig";
 
 type MoviesListProps = {
     maxItem:number,
-    status:string,
+    category_name:string,
 }
 
-export default function MoviesList({maxItem,status}:MoviesListProps) : JSX.Element {
-    const [page,setPage] = useState(1);
+export default function MoviesList({maxItem,category_name}:MoviesListProps) : JSX.Element {
+    // const [page,setPage] = useState(1);
     const [data,setData] = useState([]);
     useEffect(() => {
         const api = async () => {
-            await axios.get(`https://api.themoviedb.org/3/movie/${status}?api_key=${apiKey}&language=en-US&page=${page}`).then((response) => {
+            await axios.get(`https://api.themoviedb.org/3/movie/${category_name}?api_key=${apiKey}&language=en-US`).then((response) => {
                 if (response.data.results)
                     setData([...response.data.results.slice(0,maxItem)]);
             }).catch((error) => {   
@@ -21,7 +21,7 @@ export default function MoviesList({maxItem,status}:MoviesListProps) : JSX.Eleme
             })
         }
         api();
-    },[page]);
+    },[category_name]);
     return (
         <React.Fragment>
             <div className="movies-list">

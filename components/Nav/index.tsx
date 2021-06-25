@@ -5,9 +5,12 @@ import { AppDispatch, RootState } from '../../redux/store';
 import SearchModal from '../SearchModal';
 import VideoPlayer from '../VideoPlayer';
 
-export default function Nav() : JSX.Element {
+export default function Nav({refs}:any) : JSX.Element {
     // const search = useSelector((state:RootState) => state.search);
     const dispatch:AppDispatch = useDispatch();
+    const handleScrollTo = (id:string) => {
+        document.getElementById('upcoming').scrollIntoView({behavior:"smooth", block:"start"});
+    }
 
     return (
         <div>
@@ -18,15 +21,15 @@ export default function Nav() : JSX.Element {
                         <Link href="/"><h1>Together<span>Cinema</span></h1></Link>
                     </div>
                     <div className="nav__side__nav-items-wrapper">
+                        {/* <div className="nav__side__nav-items-wrapper__nav-item">
+                            <p>Đang chiếu</p>
+                        </div>
                         <div className="nav__side__nav-items-wrapper__nav-item">
                             <p>Sắp chiếu</p>
                         </div>
                         <div className="nav__side__nav-items-wrapper__nav-item">
-                            <p>Đang chiếu</p>
-                        </div>
-                        <div className="nav__side__nav-items-wrapper__nav-item">
                             <p>Bảng xếp hạng</p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 

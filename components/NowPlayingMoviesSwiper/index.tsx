@@ -22,12 +22,13 @@ export interface NowPlayingMoviesObject {
 
 export default function NowPlayingMoviesSwiper() : JSX.Element {
     const [data,setData] = useState<Array<NowPlayingMoviesObject>>([]);
+
     useEffect(() => {
         getNowPlayingMovies();
     },[]);
     
     const getNowPlayingMovies = async () => {
-        await axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`).then((response) => {
+        await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`).then((response) => {
             setData([...response.data.results.slice(0,10)])
         }).catch((error) => {
             console.log(error);
