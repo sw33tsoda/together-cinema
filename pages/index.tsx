@@ -8,7 +8,7 @@ import VideoPlayer from '../components/VideoPlayer';
 import PageContent from '../layouts/PageContent';
 import { useState } from 'react';
 import classnames from 'classnames';
-import MovieChart from '../components/MovieChart';
+// import MovieChart from '../components/MovieChart';
 
 const tabsList = [
   {name:'popular',title:'Đang nổi',engTitle:'Popular'},
@@ -40,8 +40,8 @@ export default function Home() {
           ))}
         </div> 
         <MoviesList maxItem={10} category_name={currentTab.name}/>
-        <SectionTitle id="ranking" title="Bản xếp hạng" engTitle="Ranking"/>
-        <MovieChart/> 
+        {/* <SectionTitle id="ranking" title="Bản xếp hạng" engTitle="Ranking"/> */}
+        {/* <MovieChart/>  */}
         {/* <SectionTitle id="now-playing" title="Đang chiếu" engTitle="Now Playing"/>
         <MoviesList maxItem={10} status="now_playing"/>
         <SectionTitle id="upcoming" title="Sắp chiếu" engTitle="Upcoming"/>

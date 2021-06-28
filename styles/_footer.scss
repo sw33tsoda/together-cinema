@@ -1,0 +1,77 @@
+.footer {
+    &__wrapper {
+        max-width: 1150px;
+        margin:auto;
+        width: 100%;
+    }
+    padding-top: 25px;
+    padding-bottom: 50px;
+    // border-top: 1px solid orangered;
+    background-color: white;
+    @include flex(column,flex-start,flex-start);
+    &__top {
+        width: 100%;
+        @include grid(4,1fr);
+        @include breakpoints(mobile) {
+            @include grid(1,1fr);
+        }
+        margin-bottom: 25px;
+    }
+
+    &__bottom {
+        width: 50%;
+        margin:auto;
+
+        @include breakpoints(mobile) {
+            width: 100%;
+        }
+    }
+
+    .logo {
+        font-size: 15pt;
+    }
+
+    &__grid-column {
+        @include flex(column,flex-start,flex-start,0);
+        @include breakpoints(mobile) {
+            align-items: center;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        > * {
+            padding: 5px;
+        }
+        
+        .footer__grid-column-subheading:first-child {
+            font-weight: bold;
+            margin-bottom: 25px;
+            @include breakpoints(mobile) {
+                margin-bottom: 0px;
+            }
+        }
+
+       .footer__grid-column-nav-link:not(:first-child) {
+            font-size: 0.85em;
+            cursor: pointer;
+            color:grey;
+            &:hover {
+                @include shadow-border;
+            }
+        }
+    }
+
+    &__input {
+        width: 100%;
+        &:hover {
+            box-shadow: none !important;
+        }
+    }
+
+    .legend {
+        &:hover {
+            box-shadow: none !important;
+            cursor: initial ;
+        }
+    }
+}

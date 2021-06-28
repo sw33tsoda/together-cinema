@@ -1,8 +1,13 @@
+import React from "react";
+import Footer from "../Footer";
 export default function PageContent({children}) {
 
     return (
-        <div className="page-content">
-            {children}
-        </div>
+        <React.Fragment>
+            <div className="page-content">
+                {children}
+            </div>
+            <Footer/>
+        </React.Fragment>
     )
 }

@@ -35,10 +35,17 @@ a {
 @import 'videoPlayer.scss';
 @import 'movieTabs.scss';
 @import 'movieChart.scss';
+@import 'footer.scss';
 
 #home {
   width: 100%;
   animation: 0.5s fadeIn;
+}
+
+.logo {
+  span {
+    color:orangered;
+  }
 }
 
 
