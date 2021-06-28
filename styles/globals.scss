@@ -21,6 +21,7 @@ a {
 
 @import 'variables.scss';
 @import 'mixins.scss';
+@import 'animations.scss';
 @import 'nav.scss';
 @import 'moviesList.scss';
 @import 'movieReview.scss';
@@ -37,6 +38,7 @@ a {
 
 #home {
   width: 100%;
+  animation: 0.5s fadeIn;
 }
 
 

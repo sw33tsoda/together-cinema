@@ -40,8 +40,8 @@ export default function Home() {
           ))}
         </div> 
         <MoviesList maxItem={10} category_name={currentTab.name}/>
-        {/* <MovieChart/> */}
-        {/* <SectionTitle id="popular" title="Đang nổi" engTitle="Popular"/> */}
+        <SectionTitle id="ranking" title="Bản xếp hạng" engTitle="Ranking"/>
+        <MovieChart/> 
         {/* <SectionTitle id="now-playing" title="Đang chiếu" engTitle="Now Playing"/>
         <MoviesList maxItem={10} status="now_playing"/>
         <SectionTitle id="upcoming" title="Sắp chiếu" engTitle="Upcoming"/>

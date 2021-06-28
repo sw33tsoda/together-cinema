@@ -214,9 +214,9 @@
             }
         }
 
-        &__overview {
+        // &__overview {
             
-        }
+        // }
 
         &__genres {
             @include flex(row,flex-start,center);
@@ -248,7 +248,6 @@
     z-index: 0;
     cursor: pointer;
     background-color: grey;
-
     &--overview & {
         &__overlay {
             display:none !important;
@@ -325,9 +324,9 @@
                 text-shadow: 0.5px 0.5px orangered;
                 font-size: 1vw;
             }
-            p {
-                // font-weight: bold;
-            }
+            // p {
+            //     // font-weight: bold;
+            // }
         }
         
         &__button-wrapper {

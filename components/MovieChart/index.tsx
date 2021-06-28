@@ -27,6 +27,9 @@ export default function MovieChart() {
                     <div className="movie-chart__top-item" key={index}>
                         <div className="movie-chart__top-item-poster">
                             <MoviePoster isOverview={true} data={movie}/>
+                            <div className="movie-chart__chart-position">
+                                {index+1}
+                            </div>
                         </div>
                         <div className="movie-chart__top-item-stats">
                             <p>{movie.original_title}</p>
